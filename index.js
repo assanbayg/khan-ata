@@ -30,7 +30,7 @@ const createRow = () => {
 
   setTimeout(() => {
     newRow.remove()
-  }, 5000)
+  }, 2500)
 }
 
 const animateRow = (row) => {
@@ -40,11 +40,11 @@ const animateRow = (row) => {
 
   setTimeout(() => {
     active = row
-  }, distance - 150)
+  }, distance - 50)
 
-  const options = [{transform: "translateY(-10000px)"}]
+  const options = [{transform: "translateY(-5000px)"}]
   const keyframes = {
-    duration: 10000,
+    duration: 5000,
     iterations: Infinity,
   }
   row.animate(options, keyframes)

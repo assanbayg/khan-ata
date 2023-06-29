@@ -4,11 +4,33 @@
   --rotation: 0deg;
 }
 
+h1 {
+  color: white;
+  font-size: 75px;
+}
+
 body {
-  background: black;
-  background-position: center;
+  display: flex;
+  background-image: url("assets/jungles.png");
   background-size: cover;
   overflow: hidden;
+}
+
+img {
+  width: 400px;
+  object-fit: cover;
+}
+
+.menu {
+  position: absolute;
+  top: 25%;
+  left: 40%;
+}
+
+.gif-wrapper {  
+  width: 400px;
+  display: flex;
+  align-items: flex-end;
 }
 
 .game-wrapper {
