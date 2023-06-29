@@ -34,6 +34,14 @@ const createRow = () => {
   generator.append(newRow)
   animateRow(newRow)
 
+  timer = setTimeout(() => {
+    // No key pressed within the time limit
+    newRow.children[randomArrow].style.setProperty("--arrow-outline", "red")
+    newRow.children[randomArrow].style.setProperty("--arrow-color", "red")
+    score--
+    scoreHeader.innerHTML = `Score: ${score}`
+  }, 1000)
+
   setTimeout(() => {
     newRow.remove()
   }, 5000)
@@ -56,27 +64,33 @@ const animateRow = (row) => {
   row.animate(options, keyframes)
 }
 
-const handleKeyDown = (e) => {
-  const directionIndex = DIRECTIONS.findIndex((direction) => direction === e.key)
-  if (!active || directionIndex === -1) return
+let timer;
 
-  const activeArrow = active.getAttribute("data-active")
+const handleKeyDown = (e) => {
+  clearTimeout(timer);
+
+  const directionIndex = DIRECTIONS.findIndex((direction) => direction === e.key);
+  if (!active) return;
+
+  const activeArrow = active.getAttribute("data-active");
   if (directionIndex == activeArrow) {
-    active.children[directionIndex].style.setProperty("--arrow-outline", "lightgreen")
-    active.children[directionIndex].style.setProperty("--arrow-color", "lightgreen")
-    score++
-    scoreHeader.innerHTML = `Score: ${score}`
+    // Correct key pressed
+    active.children[directionIndex].style.setProperty("--arrow-outline", "lightgreen");
+    active.children[directionIndex].style.setProperty("--arrow-color", "lightgreen");
+    score++;
+    scoreHeader.innerHTML = `Score: ${score}`;
     if (number == 14) {
-      number = 0
+      number = 0;
     } else {
-      number++
+      number++;
     }
-    gif.setAttribute("src", `assets/${number}.gif`)
+    gif.setAttribute("src", `assets/${number}.gif`);
   } else {
-    active.children[directionIndex].style.setProperty("--arrow-outline", "red")
-    active.children[directionIndex].style.setProperty("--arrow-color", "red")
-    score--
-    scoreHeader.innerHTML = `Score: ${score}`
+    // Incorrect key pressed
+    active.children[directionIndex].style.setProperty("--arrow-outline", "red");
+    active.children[directionIndex].style.setProperty("--arrow-color", "red");
+    score--;
+    scoreHeader.innerHTML = `Score: ${score}`;
   }
 }
 
