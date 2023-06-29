@@ -14,16 +14,49 @@ h1 span {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-body {
-  display: flex;
-  background-image: url("assets/jungles.png");
-  background-size: cover;
-  overflow: hidden;
+a {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  text-decoration: none;
+}
+
+button {
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #fff000;
+  border: 0.5;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+button:hover,
+button:focus {
+  outline: 0;
+  background: #f4e603;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
 }
 
 img {
   width: 400px;
   object-fit: cover;
+}
+
+body {
+  display: flex;
+  background-size: cover;
+  overflow: hidden;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.start {
+  background-image: url("assets/startpage.png");
+}
+
+.game{
+  background-image: url("assets/jungles.png");
 }
 
 .menu {

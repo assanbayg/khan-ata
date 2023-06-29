@@ -4,6 +4,7 @@ const DIRECTIONS = [
   'ArrowDown', 
   'ArrowRight', 
 ]
+const COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
 
 let active = null
 let score = 0
@@ -12,16 +13,18 @@ let number = 0
 const board = document.getElementById("board")
 const generator = document.getElementById("new-row-generator")
 let gif = document.getElementById("gif")
+let scoreHeader = document.getElementById("score-header")
 
 const createRow = () => {
   const newRow = board.cloneNode(true)
-  const randomGenerator = Math.floor(Math.random() * 4)
-
-  newRow.setAttribute("data-active", randomGenerator)
+  const randomArrow = Math.floor(Math.random() * 4)
+  const randomColor = Math.floor(Math.random() * 6);
+  const outlineColor = COLORS[randomColor]
+  newRow.setAttribute("data-active", randomArrow)
 
   for(let i = 0; i <= 3; i++) {
-    if (i === randomGenerator) {
-      newRow.children[i].style.setProperty("--arrow-outline", "blue")
+    if (i === randomArrow) {
+      newRow.children[i].style.setProperty("--arrow-outline", outlineColor)
     }
     else {
       newRow.children[i].style.setProperty("--arrow-outline", "transparent")
@@ -56,10 +59,7 @@ const animateRow = (row) => {
 const handleKeyDown = (event) => {
   const activeArrow = active.getAttribute("data-active")
   const pressedKey = DIRECTIONS.findIndex((direction) => direction == event.key)
-
-  console.log(activeArrow, pressedKey)
-  console.log(gif.getAttribute("src"))
-
+  
   if (pressedKey == activeArrow) {
     if(number == 14) {
       number = 0
@@ -69,11 +69,11 @@ const handleKeyDown = (event) => {
     }
     gif.setAttribute("src", `assets/${number}.gif`)    
     score++
+    scoreHeader.innerText =  `Score: ${score}`
   }
   else {
     gif.setAttribute("src", "assets/breathing.gif")    
   }
-  console.log(event.key)
 }
 
 const startGame = () => {
