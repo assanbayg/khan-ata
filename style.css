@@ -45,18 +45,18 @@ img {
 }
 
 body {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   display: flex;
   background-size: cover;
   overflow: hidden;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .start {
-  background-image: url("assets/startpage.png");
+  background-image: url("assets/image/startpage.png");
 }
 
 .game{
-  background-image: url("assets/jungles.png");
+  background-image: url("assets/image/jungles.png    ");
 }
 
 .menu {
@@ -65,7 +65,7 @@ body {
   width: 60%;
   top: 20%;
   left: 20%;
-  background-image: url(assets/menu.png);
+  background-image: url(assets/image/menu.png);
   background-size: cover;
 }
 
