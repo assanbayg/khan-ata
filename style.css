@@ -20,9 +20,9 @@ a {
 }
 
 button {
-  width: 100%;
+  width: 50%;
   padding: 10px 15px;
-  background-color: #fff000;
+  background-color: #ffffff;
   border: 0.5;
   border-radius: 12px;
   font-weight: bold;
@@ -36,8 +36,9 @@ button:hover,
 button:focus {
   outline: 0;
   background: #f4e603;
-  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, .2), 0 3px 8px 0 rgba(0, 0, 0, .15);
 }
+
 
 img {
   width: 400px;
@@ -54,6 +55,25 @@ body {
 .game{
   background-image: url("assets/image/jungles.png    ");
 }
+
+
+/* here */
+.popup {
+  position: absolute;
+  z-index: 20;
+  height: 60%;
+  width: 60%;
+  top: 20%;
+  left: 20%;
+  background-image: url(assets/image/menu.png);
+  background-size: cover;
+}
+
+.hide_popup {
+  visibility: hidden;
+}
+
+
 
 .menu {
   position: absolute;

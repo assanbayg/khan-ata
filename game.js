@@ -12,6 +12,9 @@ let score = 0
 let image_number = 0
 let audio_number = 0
 let strike = 0
+let CONST_ID  
+
+let backgroundAudio = new Audio(`./assets/audio/main.mp3`)
 
 const board = document.getElementById("board")
 const generator = document.getElementById("new-row-generator")
@@ -87,6 +90,11 @@ const playAudio = (src) => {
   audio.play()
 }
 
+const playBackground = () => {
+  backgroundAudio = new Audio(`./assets/audio/main.mp3`)
+  backgroundAudio.play()
+}
+
 // play fail audio
 const playIncorrectAudio = () => {
 
@@ -140,7 +148,15 @@ const handleKeyDown = (e) => {
 
 const startGame = () => {
   document.addEventListener('keydown', handleKeyDown)
-  setInterval(() => createRow(), 1000)
+  CONST_ID = setInterval(() => createRow(), 1000)
 }
 
-startGame()
+const endGame = () => {
+  clearInterval(refreshIntervalId);
+}
+
+const start_button = document.getElementById("start_button")
+start_button.addEventListener('click', () => {
+  document.getElementById("popup").classList.add('hide_popup');
+  startGame()
+})
