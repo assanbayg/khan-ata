@@ -71,6 +71,7 @@ const animateRow = (row) => {
 let missTimer
 
 let audioPlaying = false
+let incorrectAudioPlaying = false
 let audio
 //play audio on pressed key
 const playAudio = (src) => {
@@ -84,6 +85,27 @@ const playAudio = (src) => {
   })
 
   audio.play()
+}
+
+// play fail audio
+const playIncorrectAudio = () => {
+
+  incorrectAudioPlaying = true
+  const src = `./assets/audio/fail.mp3`
+  stopAudio(); // Stop any currently playing audio
+  playAudio(src)
+
+  audio.addEventListener('ended', () => {
+    incorrectAudioPlaying = false
+  })
+}
+
+// stop audio
+const stopAudio = () => {
+  if (audioPlaying && audio) {
+    audio.pause()
+    audioPlaying = false
+  }
 }
 
 const handleKeyDown = (e) => {
@@ -100,17 +122,17 @@ const handleKeyDown = (e) => {
     score++
     scoreHeader.innerHTML = `Score: ${score}`
     image_number == 14 ? image_number = 0 : image_number++
-    audio_number == 7 ? audio_number = 0 : audio_number++
+    audio_number == 7 ? audio_number = 0 : audio_number++ 
     playAudio(`./assets/audio/${audio_number}.mp3`)
     gif.setAttribute("src", `assets/image/${image_number}.gif`)
   } else {
     // if incorrect key was pressed
+    stopAudio()
     active.children[directionIndex].style.setProperty("--arrow-outline", "red")
     active.children[directionIndex].style.setProperty("--arrow-color", "red")
     score--
     scoreHeader.innerHTML = `Score: ${score}`
-    audioPlaying = false
-    playAudio("./assets/audio/fail.mp3")
+    playIncorrectAudio()
     gif.setAttribute("src", "assets/image/breathing.gif")
   }
 }
