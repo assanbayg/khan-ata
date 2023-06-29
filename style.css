@@ -5,8 +5,13 @@
 }
 
 h1 {
+  text-align: center;
   color: white;
   font-size: 75px;
+}
+
+h1 span {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 body {

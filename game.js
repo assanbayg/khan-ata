@@ -6,9 +6,12 @@ const DIRECTIONS = [
 ]
 
 let active = null
+let score = 0
+let number = 0
 
 const board = document.getElementById("board")
 const generator = document.getElementById("new-row-generator")
+let gif = document.getElementById("gif")
 
 const createRow = () => {
   const newRow = board.cloneNode(true)
@@ -30,7 +33,7 @@ const createRow = () => {
 
   setTimeout(() => {
     newRow.remove()
-  }, 2500)
+  }, 5000)
 }
 
 const animateRow = (row) => {
@@ -40,11 +43,11 @@ const animateRow = (row) => {
 
   setTimeout(() => {
     active = row
-  }, distance - 50)
+  }, distance - 150)
 
-  const options = [{transform: "translateY(-5000px)"}]
+  const options = [{transform: "translateY(-10000px)"}]
   const keyframes = {
-    duration: 5000,
+    duration: 20000,
     iterations: Infinity,
   }
   row.animate(options, keyframes)
@@ -53,22 +56,29 @@ const animateRow = (row) => {
 const handleKeyDown = (event) => {
   const activeArrow = active.getAttribute("data-active")
   const pressedKey = DIRECTIONS.findIndex((direction) => direction == event.key)
-  // const pressedKey = event.key
+
   console.log(activeArrow, pressedKey)
+  console.log(gif.getAttribute("src"))
 
   if (pressedKey == activeArrow) {
-    console.log("YESS")
+    if(number == 14) {
+      number = 0
+    }
+    else {
+      number++
+    }
+    gif.setAttribute("src", `assets/${number}.gif`)    
+    score++
   }
   else {
-    console.log("miss")
+    gif.setAttribute("src", "assets/breathing.gif")    
   }
   console.log(event.key)
 }
 
 const startGame = () => {
   document.addEventListener('keydown', handleKeyDown)
-  setInterval(() => {
-    createRow()}, 1000)
+  setInterval(() => createRow(), 1000)
 }
 
 startGame()
