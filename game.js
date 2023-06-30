@@ -1,3 +1,4 @@
+let started_bgaudio = false;
 //names of keys
 const DIRECTIONS = [
   'ArrowLeft',
@@ -148,20 +149,34 @@ const handleKeyDown = (e) => {
 
 const startGame = () => {
   var sound = document.createElement('audio');
-  sound.id = 'audio-player';
+  sound.id = 'bg-song';
   sound.src = './assets/audio/main.mp3';
   sound.autoplay = true;
   document.getElementById("body_main").appendChild(sound)
   document.addEventListener('keydown', handleKeyDown)
   CONST_ID = setInterval(() => createRow(), 1000)
+
+  const myAudio = document.getElementById('bg-song')
+  myAudio.addEventListener("ended", () => {
+    if (started_bgaudio) {
+      endGame()
+    }
+  });
+
 }
 
+
+
 const endGame = () => {
-  clearInterval(refreshIntervalId);
+  clearInterval(CONST_ID);
+  gif.setAttribute("src", `assets/image/breathing.gif`)
+  document.getElementById("score").innerHTML = `Score: ${score}`;
+  document.getElementById("gameover").classList.remove('hide_popup');
 }
 
 const start_button = document.getElementById("start_button")
 start_button.addEventListener('click', () => {
   document.getElementById("popup").classList.add('hide_popup');
+  started_bgaudio = true;
   startGame()
 })
