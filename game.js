@@ -1,9 +1,9 @@
 //names of keys
 const DIRECTIONS = [
-  'ArrowLeft', 
-  'ArrowUp', 
-  'ArrowDown', 
-  'ArrowRight', 
+  'ArrowLeft',
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowRight',
 ]
 const COLORS = ["red", "orange", "yellow", "darkgreen", "blue", "purple"]
 
@@ -12,7 +12,7 @@ let score = 0
 let image_number = 0
 let audio_number = 0
 let strike = 0
-let CONST_ID  
+let CONST_ID
 
 let backgroundAudio = new Audio(`./assets/audio/main.mp3`)
 
@@ -29,7 +29,7 @@ const createRow = () => {
   newRow.setAttribute("data-active", randomArrow)
 
   // we create new row, but only randomly chosen would be visible
-  for(let i = 0; i <= 3; i++) {
+  for (let i = 0; i <= 3; i++) {
     if (i === randomArrow) {
       newRow.children[i].style.setProperty("--arrow-outline", outlineColor)
     }
@@ -63,7 +63,7 @@ const animateRow = (row) => {
     active = row
   }, distance)
   //just moving arrows up
-  const options = [{transform: "translateY(-10000px)"}]
+  const options = [{ transform: "translateY(-10000px)" }]
   const keyframes = {
     duration: 20000,
     iterations: Infinity,
@@ -79,7 +79,7 @@ let audio
 //play audio on pressed key
 const playAudio = (src) => {
   if (audioPlaying) return
-  
+
   audioPlaying = true
   audio = new Audio(src)
 
@@ -130,7 +130,7 @@ const handleKeyDown = (e) => {
     score++
     scoreHeader.innerHTML = `Score: ${score}`
     image_number == 14 ? image_number = 0 : image_number++
-    audio_number == 7 ? audio_number = 0 : audio_number++ 
+    audio_number == 7 ? audio_number = 0 : audio_number++
     playAudio(`./assets/audio/${audio_number}.mp3`)
     gif.setAttribute("src", `assets/image/${image_number}.gif`)
   } else {
@@ -147,6 +147,11 @@ const handleKeyDown = (e) => {
 
 
 const startGame = () => {
+  var sound = document.createElement('audio');
+  sound.id = 'audio-player';
+  sound.src = './assets/audio/main.mp3';
+  sound.autoplay = true;
+  document.getElementById("body_main").appendChild(sound)
   document.addEventListener('keydown', handleKeyDown)
   CONST_ID = setInterval(() => createRow(), 1000)
 }
