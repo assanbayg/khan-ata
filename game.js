@@ -1,9 +1,9 @@
 //names of keys
 const DIRECTIONS = [
-  'ArrowLeft', 
-  'ArrowUp', 
-  'ArrowDown', 
-  'ArrowRight', 
+  'ArrowLeft',
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowRight',
 ]
 const COLORS = ["red", "orange", "yellow", "darkgreen", "blue", "purple"]
 
@@ -12,6 +12,7 @@ let score = 0
 let image_number = 0
 let audio_number = 0
 let strike = 0
+let CONST_ID  //HERE -----------------------------------<
 
 const board = document.getElementById("board")
 const generator = document.getElementById("new-row-generator")
@@ -26,7 +27,7 @@ const createRow = () => {
   newRow.setAttribute("data-active", randomArrow)
 
   // we create new row, but only randomly chosen would be visible
-  for(let i = 0; i <= 3; i++) {
+  for (let i = 0; i <= 3; i++) {
     if (i === randomArrow) {
       newRow.children[i].style.setProperty("--arrow-outline", outlineColor)
     }
@@ -60,7 +61,7 @@ const animateRow = (row) => {
     active = row
   }, distance)
   //just moving arrows up
-  const options = [{transform: "translateY(-10000px)"}]
+  const options = [{ transform: "translateY(-10000px)" }]
   const keyframes = {
     duration: 20000,
     iterations: Infinity,
@@ -75,7 +76,7 @@ let audio
 //play audio on pressed key
 const playAudio = (src) => {
   if (audioPlaying) return
-  
+
   audioPlaying = true
   audio = new Audio(src)
 
@@ -115,10 +116,18 @@ const handleKeyDown = (e) => {
   }
 }
 
-
+//HERE -----------------------------------
 const startGame = () => {
   document.addEventListener('keydown', handleKeyDown)
-  setInterval(() => createRow(), 1000)
+  CONST_ID = setInterval(() => createRow(), 1000)
 }
 
-startGame()
+const endGame = () => {
+  clearInterval(refreshIntervalId);
+}
+
+const start_button = document.getElementById("start_button")
+start_button.addEventListener('click', () => {
+  document.getElementById("popup").classList.add('hide_popup');
+  startGame()
+})

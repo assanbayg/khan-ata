@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Khan Ata Dance</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body class="game">
-    <div class="gif-wrapper">
-      <img src="assets/image/breathing.gif" id="gif">
-    </div>
-    <div class="game-wrapper">
-      <h1><span id="score-header">Score: 0</span></h1>
+
+<head>
+  <title>Khan Ata Dance</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="game">
+  <div class="gif-wrapper">
+    <img src="assets/image/breathing.gif" id="gif">
+  </div>
+  <div class="game-wrapper">
+    <h1><span id="score-header">Score: 0</span></h1>
     <div class="board-wrapper" id="board">
       <div class="arrow-wrapper left" id="left">
         <div class="arrow"></div>
@@ -25,7 +27,13 @@
       </div>
     </div>
     <div class="new-row-generator" id="new-row-generator"></div>
-    </div>
-<script src="game.js"></script>
-  </body>
+  </div>
+
+  <div id="popup" class="popup">
+    <h1 style="padding-top: 10%; padding-right: 40%;"><button id="start_button">Play</button></h1>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+
 </html>
