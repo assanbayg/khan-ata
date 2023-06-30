@@ -18,7 +18,7 @@ let scoreHeader = document.getElementById("score-header")
 const createRow = () => {
   const newRow = board.cloneNode(true)
   const randomArrow = Math.floor(Math.random() * 4)
-  const randomColor = Math.floor(Math.random() * 6);
+  const randomColor = Math.floor(Math.random() * 6)
   const outlineColor = COLORS[randomColor]
   newRow.setAttribute("data-active", randomArrow)
 
@@ -46,7 +46,7 @@ const animateRow = (row) => {
 
   setTimeout(() => {
     active = row
-  }, distance - 150)
+  }, distance)
 
   const options = [{transform: "translateY(-10000px)"}]
   const keyframes = {
@@ -56,25 +56,30 @@ const animateRow = (row) => {
   row.animate(options, keyframes)
 }
 
-const handleKeyDown = (event) => {
+const handleKeyDown = (e) => {
+  const directionIndex = DIRECTIONS.findIndex((direction) => direction === e.key)
+  if (!active || directionIndex === -1) return
+
   const activeArrow = active.getAttribute("data-active")
-  const pressedKey = DIRECTIONS.findIndex((direction) => direction == event.key)
-  
-  if (pressedKey == activeArrow) {
-    if(number == 14) {
+  if (directionIndex == activeArrow) {
+    active.children[directionIndex].style.setProperty("--arrow-outline", "lightgreen")
+    active.children[directionIndex].style.setProperty("--arrow-color", "lightgreen")
+    score++
+    scoreHeader.innerHTML = `Score: ${score}`
+    if (number == 14) {
       number = 0
-    }
-    else {
+    } else {
       number++
     }
-    gif.setAttribute("src", `assets/${number}.gif`)    
-    score++
-    scoreHeader.innerText =  `Score: ${score}`
-  }
-  else {
-    gif.setAttribute("src", "assets/breathing.gif")    
+    gif.setAttribute("src", `assets/${number}.gif`)
+  } else {
+    active.children[directionIndex].style.setProperty("--arrow-outline", "red")
+    active.children[directionIndex].style.setProperty("--arrow-color", "red")
+    score--
+    scoreHeader.innerHTML = `Score: ${score}`
   }
 }
+
 
 const startGame = () => {
   document.addEventListener('keydown', handleKeyDown)
